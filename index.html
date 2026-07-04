@@ -543,6 +543,9 @@
   .td-valor-ok { color: var(--accent3); font-weight: 700; }
   .td-valor-zero { color: var(--muted); }
   .td-valor-texto { color: var(--accent4); font-weight: 600; font-style: italic; }
+  /* Destaque para valores "PARCIAL" na tabela dia a dia */
+  .td-valor-parcial { background: rgba(255,204,0,0.22) !important; color: #ffcc00 !important; font-weight: 800 !important; font-style: normal !important; border-radius: 4px; }
+  body.light-theme .td-valor-parcial { background: rgba(255,180,0,0.28) !important; color: #7a5200 !important; }
 
   /* Linha de total */
   .tr-total td {
@@ -2243,7 +2246,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
   const dataColW  = numTeams === 1 ? '115px' : numTeams === 2 ? '90px'  : numTeams <= 3 ? '95px'  : '105px';
   const colServW  = numTeams === 1 ? '60px'  : numTeams === 2 ? '68px'  : '62px';
   const colOsW    = numTeams === 1 ? '80px'  : numTeams === 2 ? '78px'  : '65px';
-  const colValW   = numTeams === 1 ? '90px'  : numTeams === 2 ? '84px'  : '74px';
+  const colValW   = numTeams === 1 ? '108px' : numTeams === 2 ? '98px'  : '88px';
 
   // Força table-layout:fixed para respeitar as larguras definidas
   const tabelaEl = document.getElementById('tabelaDiaria');
@@ -2330,7 +2333,8 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
 
         // Valor — se não houver valor numérico mas a planilha trouxer um texto
         // (nome parcial, observação, etc.) na célula de valor, mostra esse texto no lugar.
-        const valorClass = cel.valor > 0 ? 'td-valor-ok' : (cel.valorTexto ? 'td-valor-texto' : 'td-valor-zero');
+        const isParcial = !!(cel.valorTexto && /parcial/i.test(cel.valorTexto));
+        const valorClass = cel.valor > 0 ? 'td-valor-ok' : (cel.valorTexto ? (isParcial ? 'td-valor-parcial' : 'td-valor-texto') : 'td-valor-zero');
         let valorStr;
         if (cel.valor > 0) {
           valorStr = `R$ ${fmt(cel.valor)}`;
@@ -2346,7 +2350,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
 
         row += `<td style="${borderLeft};width:${colServW};overflow:hidden">${chipTipo}${pardaIndicator}</td>`;
         row += `<td class="${osClass}" style="font-size:9px;width:${colOsW};max-width:${colOsW};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${osDisplay}</td>`;
-        row += `<td class="${valorClass}" style="font-size:10px;width:${colValW};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${valorStr}</td>`;
+        row += `<td class="${valorClass}" style="font-size:10px;width:${colValW};max-width:${colValW};padding:4px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${cel.valor > 0 ? 'R$ ' + fmt(cel.valor) : (cel.valorTexto || '')}">${valorStr}</td>`;
 
         totaisEquipe[t.id] += cel.valor;
         totaisOSEquipe[t.id] += osCount;
