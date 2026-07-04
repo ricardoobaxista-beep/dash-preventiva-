@@ -2235,11 +2235,11 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
   const colsPerTeam = 3; // Serviço | OS | Valor
   const numTeams = teamsFiltered.length;
 
-  // Larguras por número de equipes filtradas
-  const dataColW  = numTeams === 1 ? '115px' : numTeams === 2 ? '85px'  : numTeams <= 3 ? '90px'  : '105px';
-  const colServW  = numTeams === 1 ? '60px'  : numTeams === 2 ? '65px'  : '58px';
-  const colOsW    = numTeams === 1 ? '80px'  : numTeams === 2 ? '75px'  : '62px';
-  const colValW   = numTeams === 1 ? '90px'  : numTeams === 2 ? '80px'  : '70px';
+  // Larguras por número de equipes filtradas (levemente maiores para caber o nome completo da equipe no cabeçalho)
+  const dataColW  = numTeams === 1 ? '115px' : numTeams === 2 ? '90px'  : numTeams <= 3 ? '95px'  : '105px';
+  const colServW  = numTeams === 1 ? '60px'  : numTeams === 2 ? '68px'  : '62px';
+  const colOsW    = numTeams === 1 ? '80px'  : numTeams === 2 ? '78px'  : '65px';
+  const colValW   = numTeams === 1 ? '90px'  : numTeams === 2 ? '84px'  : '74px';
 
   // Força table-layout:fixed para respeitar as larguras definidas
   const tabelaEl = document.getElementById('tabelaDiaria');
@@ -2251,7 +2251,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
   let headRow1 = `<tr><th rowspan="2" style="text-align:left;padding-left:6px;width:${dataColW};min-width:${dataColW};max-width:${dataColW}">DATA</th>`;
   let headRow2 = '';
   teamsFiltered.forEach(t => {
-    headRow1 += `<th colspan="${colsPerTeam}" style="color:${t.color};border-left:2px solid ${t.color}40">${numTeams === 1 ? t.name : t.id}</th>`;
+    headRow1 += `<th colspan="${colsPerTeam}" style="color:${t.color};border-left:2px solid ${t.color}40;white-space:normal;word-break:break-word;line-height:1.25;padding:6px 3px">${t.name}</th>`;
     headRow2 += `<th style="border-left:2px solid rgba(30,40,64,0.8);width:${colServW}">TIPO</th><th style="width:${colOsW}">OS</th><th style="width:${colValW}">VALOR</th>`;
   });
   headRow1 += `</tr>`;
