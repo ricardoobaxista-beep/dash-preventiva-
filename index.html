@@ -3728,15 +3728,19 @@ function normalizeDateGSheets(str) {
   // YYYY-MM-DD já ok
   if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
 
-  // M/D/YYYY ou MM/DD/YYYY — formato americano do Google Sheets
+  // D/M/YYYY ou DD/MM/YYYY — planilhas do Google Sheets com localidade Brasil publicam
+  // as datas nesse formato (dia primeiro), igual ao restante do dashboard (formatDateBR).
   const mx = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (mx) {
-    const mes = parseInt(mx[1]);
-    const dia = parseInt(mx[2]);
+    const a = parseInt(mx[1]), b = parseInt(mx[2]);
     const ano = mx[3];
-    // Valida: mês entre 1-12, dia entre 1-31
-    if (mes >= 1 && mes <= 12 && dia >= 1 && dia <= 31) {
-      return `${ano}-${String(mes).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
+    // Se o segundo número > 12, ele só pode ser dia → primeiro número é mês (M/DD/YYYY, formato americano)
+    if (b > 12 && a <= 12) {
+      return `${ano}-${String(a).padStart(2,'0')}-${String(b).padStart(2,'0')}`;
+    }
+    // Padrão: Brasil (DD/MM/YYYY) — cobre também o caso ambíguo (ambos ≤ 12)
+    if (a >= 1 && a <= 31 && b >= 1 && b <= 12) {
+      return `${ano}-${String(b).padStart(2,'0')}-${String(a).padStart(2,'0')}`;
     }
   }
 
