@@ -589,6 +589,7 @@
   .badge-ok { background: rgba(255,184,77,0.1); color: var(--accent3); }
   .badge-warn { background: rgba(255,204,0,0.1); color: var(--accent4); }
   .badge-danger { background: rgba(255,107,53,0.1); color: var(--accent2); }
+  .badge-status-concluido { background: rgba(0,224,164,0.12); color: var(--accent); }
 
   /* JUSTIFICATIVAS */
   .justificativas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
@@ -873,11 +874,11 @@
         <label style="margin-left:8px">Equipe:</label>
         <select id="filtroEquipeDash" onchange="renderDashboard()" style="max-width:200px">
           <option value="todas">Todas as equipes</option>
-          <option value="PM-01">PM-01 GUSTAVO</option>
-          <option value="PM-02">PM-02 MARIO</option>
-          <option value="PM-03">PM-03 GLAUBERTO</option>
-          <option value="PM-04">PM-04 CICERO</option>
-          <option value="PM-05">PM-05 PAULO SERGIO</option>
+          <option value="PM-01">GUSTAVO</option>
+          <option value="PM-02">MARIO</option>
+          <option value="PM-03">GLAUBERTO</option>
+          <option value="PM-04">CICERO</option>
+          <option value="PM-05">PAULO SERGIO</option>
         </select>
       </div>
       <div class="kpi-grid">
@@ -960,11 +961,11 @@
         <label>Equipe:</label>
         <select id="filtroEquipeFat" onchange="renderFaturamento()">
           <option value="todas">Todas as equipes</option>
-          <option value="PM-01">PM-01 GUSTAVO</option>
-          <option value="PM-02">PM-02 MARIO</option>
-          <option value="PM-03">PM-03 GLAUBERTO</option>
-          <option value="PM-04">PM-04 CICERO</option>
-          <option value="PM-05">PM-05 PAULO SERGIO</option>
+          <option value="PM-01">GUSTAVO</option>
+          <option value="PM-02">MARIO</option>
+          <option value="PM-03">GLAUBERTO</option>
+          <option value="PM-04">CICERO</option>
+          <option value="PM-05">PAULO SERGIO</option>
         </select>
       </div>
 
@@ -1021,11 +1022,11 @@
         <label>Equipe:</label>
         <select id="filtroEquipeProd" onchange="renderProducao()">
           <option value="todas">Todas as equipes</option>
-          <option value="PM-01">PM-01 GUSTAVO</option>
-          <option value="PM-02">PM-02 MARIO</option>
-          <option value="PM-03">PM-03 GLAUBERTO</option>
-          <option value="PM-04">PM-04 CICERO</option>
-          <option value="PM-05">PM-05 PAULO SERGIO</option>
+          <option value="PM-01">GUSTAVO</option>
+          <option value="PM-02">MARIO</option>
+          <option value="PM-03">GLAUBERTO</option>
+          <option value="PM-04">CICERO</option>
+          <option value="PM-05">PAULO SERGIO</option>
         </select>
       </div>
       <div class="charts-row3">
@@ -1109,11 +1110,11 @@
         <label>Equipe:</label>
         <select id="filtroEquipeJust" onchange="renderJustificativas()">
           <option value="todas">Todas</option>
-          <option value="PM-01">PM-01 GUSTAVO</option>
-          <option value="PM-02">PM-02 MARIO</option>
-          <option value="PM-03">PM-03 GLAUBERTO</option>
-          <option value="PM-04">PM-04 CICERO</option>
-          <option value="PM-05">PM-05 PAULO SERGIO</option>
+          <option value="PM-01">GUSTAVO</option>
+          <option value="PM-02">MARIO</option>
+          <option value="PM-03">GLAUBERTO</option>
+          <option value="PM-04">CICERO</option>
+          <option value="PM-05">PAULO SERGIO</option>
         </select>
         <label>Motivo:</label>
         <select id="filtroMotivoJust" onchange="renderJustificativas()">
@@ -1152,11 +1153,11 @@
         <label>Equipe:</label>
         <select id="filtroEquipeCanel" onchange="renderCancelados()">
           <option value="todas">Todas</option>
-          <option value="PM-01">PM-01 GUSTAVO</option>
-          <option value="PM-02">PM-02 MARIO</option>
-          <option value="PM-03">PM-03 GLAUBERTO</option>
-          <option value="PM-04">PM-04 CICERO</option>
-          <option value="PM-05">PM-05 PAULO SERGIO</option>
+          <option value="PM-01">GUSTAVO</option>
+          <option value="PM-02">MARIO</option>
+          <option value="PM-03">GLAUBERTO</option>
+          <option value="PM-04">CICERO</option>
+          <option value="PM-05">PAULO SERGIO</option>
         </select>
         <label>Motivo:</label>
         <select id="filtroMotivoCanel" onchange="renderCancelados()">
@@ -1310,11 +1311,11 @@ data,mês,equipe,OS,valor,tipo_servico,dias_sem_prod,justificativa
     <div class="form-group">
       <label>Equipe</label>
       <select id="entryEquipe">
-        <option value="PM-01">PM-01 GUSTAVO</option>
-        <option value="PM-02">PM-02 MARIO</option>
-        <option value="PM-03">PM-03 GLAUBERTO</option>
-        <option value="PM-04">PM-04 CICERO</option>
-        <option value="PM-05">PM-05 PAULO SERGIO</option>
+        <option value="PM-01">GUSTAVO</option>
+        <option value="PM-02">MARIO</option>
+        <option value="PM-03">GLAUBERTO</option>
+        <option value="PM-04">CICERO</option>
+        <option value="PM-05">PAULO SERGIO</option>
       </select>
     </div>
     <div class="form-group">
@@ -1355,11 +1356,11 @@ data,mês,equipe,OS,valor,tipo_servico,dias_sem_prod,justificativa
     <div class="form-group">
       <label>Equipe</label>
       <select id="justEquipe">
-        <option value="PM-01">PM-01 GUSTAVO</option>
-        <option value="PM-02">PM-02 MARIO</option>
-        <option value="PM-03">PM-03 GLAUBERTO</option>
-        <option value="PM-04">PM-04 CICERO</option>
-        <option value="PM-05">PM-05 PAULO SERGIO</option>
+        <option value="PM-01">GUSTAVO</option>
+        <option value="PM-02">MARIO</option>
+        <option value="PM-03">GLAUBERTO</option>
+        <option value="PM-04">CICERO</option>
+        <option value="PM-05">PAULO SERGIO</option>
       </select>
     </div>
     <div class="form-group">
@@ -1987,7 +1988,7 @@ function renderFaturamento() {
       <td style="font-family:'JetBrains Mono',monospace">${r.os||'—'}</td>
       <td style="font-weight:700;color:var(--accent3)">R$ ${fmt(r.valor)}</td>
       <td>${r.tipo_servico||'—'}</td>
-      <td><span class="badge badge-ok">✓ Concluído</span></td>
+      <td><span class="badge badge-status-concluido">✓ Concluído</span></td>
     </tr>`;
   }).join('');
 }
@@ -2157,19 +2158,16 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
     return;
   }
 
-  // Determina o mês a exibir com base no filtro selecionado
+  // Determina o mês a exibir com base no filtro selecionado (formato "AAAA-MM")
   const filtroMesVal = document.getElementById('filtroMesProd')?.value || 'todos';
 
   let anoRef, mesRef; // mesRef = 0-based
 
   if (filtroMesVal !== 'todos') {
-    // Mês específico selecionado — usa ele diretamente
-    const mesNum = parseInt(filtroMesVal); // 1-based
-    // Pega o ano a partir dos dados filtrados
-    const datasF = filtered.map(r => r.data).sort();
-    const anoDetect = datasF.length > 0 ? parseInt(datasF[0].slice(0,4)) : new Date().getFullYear();
-    anoRef = anoDetect;
-    mesRef = mesNum - 1; // converte para 0-based
+    // Mês específico selecionado — usa o ano e mês exatos do filtro (não adivinha a partir dos dados)
+    const [anoStr, mesStr] = filtroMesVal.split('-');
+    anoRef = parseInt(anoStr);
+    mesRef = parseInt(mesStr) - 1; // converte para 0-based
   } else {
     // "Todos os meses" — exibe o mês mais recente dos dados
     const todasDatas = [...filtered.map(r => r.data), ...filtJust.map(j => j.data)].sort();
@@ -2377,7 +2375,9 @@ function renderEquipes() {
     return;
   }
 
-  const periodoLabel = mes === 'todos' ? 'Todos os meses' : MONTHS_FULL[parseInt(mes)-1];
+  const mesNumSel = mes !== 'todos' ? parseInt(mes.split('-')[1]) : null;
+  const anoSel    = mes !== 'todos' ? parseInt(mes.split('-')[0]) : null;
+  const periodoLabel = mes === 'todos' ? 'Todos os meses' : `${MONTHS_FULL[mesNumSel-1]} ${anoSel}`;
 
   // Meta mensal fixa por equipe
   const META_MENSAL_EQUIPE = {
@@ -2403,7 +2403,7 @@ function renderEquipes() {
     const todosRecs = records.filter(r => {
       if (r.equipe !== t.id) return false;
       if (mes === 'todos') return true;
-      return r.mes === parseInt(mes);
+      return r.mes === mesNumSel && r.ano === anoSel;
     });
 
     const diasFolga = new Set(
@@ -2422,7 +2422,7 @@ function renderEquipes() {
       mesesPresentes.forEach(m => { totalDiasMes += diasNoMes(anoRef, m); });
       if (totalDiasMes === 0) totalDiasMes = new Date().getDate();
     } else {
-      totalDiasMes = diasNoMes(anoRef, parseInt(mes));
+      totalDiasMes = diasNoMes(anoSel, mesNumSel);
     }
 
     const diasQueTrabalha = Math.max(1, totalDiasMes - diasFolga.size);
@@ -2548,8 +2548,12 @@ function renderCancelados() {
     return;
   }
 
-  // Filtra por mês
-  let filtered = cancelados.filter(c => filtMes === 'todos' || String(c.mes) === String(filtMes));
+  // Filtra por mês (formato "AAAA-MM")
+  let filtered = cancelados.filter(c => {
+    if (filtMes === 'todos') return true;
+    const [anoF, mesF] = filtMes.split('-');
+    return String(c.ano) === String(anoF) && String(c.mes) === String(parseInt(mesF));
+  });
   if (filtEquipe !== 'todas') filtered = filtered.filter(c => c.equipe === filtEquipe);
   if (filtMotivo !== 'todos') filtered = filtered.filter(c => c.motivo === filtMotivo);
 
@@ -2747,7 +2751,7 @@ function renderCancelados() {
 
   // ── Tabela ──
   const subtitle = document.getElementById('canceladosSubtitle');
-  if (subtitle) subtitle.innerHTML = `<strong style="color:#ff4444">${filtered.length}</strong> cancelamentos encontrados${filtMes !== 'todos' ? ` em <strong>${MONTHS_FULL[parseInt(filtMes)-1]}</strong>` : ''}`;
+  if (subtitle) subtitle.innerHTML = `<strong style="color:#ff4444">${filtered.length}</strong> cancelamentos encontrados${filtMes !== 'todos' ? ` em <strong>${MONTHS_FULL[parseInt(filtMes.split('-')[1])-1]} ${filtMes.split('-')[0]}</strong>` : ''}`;
 
   const tbody = document.getElementById('canceladosTbody');
   if (!filtered.length) {
@@ -3216,9 +3220,10 @@ function parseCancelados(rows) {
     const equipeId = teamMatch ? teamMatch.id : (equipeRaw || 'N/A');
 
     const mesNum = parseInt(dataStr.slice(5,7)) || 0;
+    const anoNum = parseInt(dataStr.slice(0,4)) || 0;
     const valor  = parseValor(rawValor);
 
-    novos.push({ data: dataStr, mes: mesNum, equipe: equipeId, os, valor, tipo_servico: tipo, motivo, descricao });
+    novos.push({ data: dataStr, mes: mesNum, ano: anoNum, equipe: equipeId, os, valor, tipo_servico: tipo, motivo, descricao });
   });
 
   cancelados = novos;
@@ -3297,6 +3302,7 @@ function parseExcelRows(rows) {
     const mesNum = parseInt(dataStr.split('-')[1]);
     const mes = isNaN(mesNum) ? null : mesNum;
     if (!mes) return;
+    const ano = parseInt(dataStr.split('-')[0]) || null;
 
     // ---- OS ----
     const osRaw = row.os !== undefined && row.os !== null ? row.os : (row.ordem_servico || row.ordem || '');
@@ -3318,11 +3324,11 @@ function parseExcelRows(rows) {
     const isFolga = tipoServico.trim().toUpperCase() === 'F' || tipoServico.trim().toUpperCase() === 'FOLGA';
 
     if (isFolga || os || valor > 0) {
-      newRecords.push({ data: dataStr, mes, equipe, os, valor, tipo_servico: tipoServico });
+      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, tipo_servico: tipoServico });
     }
     if (diasSem > 0 || justif) {
       newJusts.push({
-        data: dataStr, mes, equipe,
+        data: dataStr, mes, ano, equipe,
         motivo: justif ? categorizarMotivo(justif) : 'Outros',
         descricao: justif
       });
@@ -3331,7 +3337,10 @@ function parseExcelRows(rows) {
 
   records        = newRecords;
   justificativas = newJusts;
-  const mesesDetect = [...new Set(newRecords.map(r=>r.mes).filter(Boolean))].sort((a,b)=>a-b).map(m=>MONTHS_FULL[m-1]).join(', ');
+  const mesesDetect = [...new Set(newRecords.map(r => `${r.ano}-${String(r.mes).padStart(2,'0')}`).filter(Boolean))]
+    .sort()
+    .map(chave => { const [a,m] = chave.split('-'); return `${MONTHS_FULL[parseInt(m)-1]} ${a}`; })
+    .join(', ');
   alert(`✅ Importado com sucesso!\n${newRecords.length} registros de produção\n${newJusts.length} justificativas\nMeses detectados: ${mesesDetect||'nenhum'}`);
 }
 
@@ -3379,6 +3388,7 @@ function parseCSV(text) {
     }
 
     const mes          = parseInt(dataStr.split('-')[1]);
+    const ano          = parseInt(dataStr.split('-')[0]) || null;
     const valor        = parseValor(row.valor || row.value || '0');
     const os           = row.os || row.ordem_servico || '';
     const tipoServico  = row.tipo_servico || row.tipo || '';
@@ -3387,10 +3397,10 @@ function parseCSV(text) {
 
     const isFolga = ['F','FOLGA'].includes(tipoServico.trim().toUpperCase());
     if (isFolga || os || valor > 0) {
-      newRecords.push({ data: dataStr, mes, equipe, os, valor, tipo_servico: tipoServico });
+      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, tipo_servico: tipoServico });
     }
     if (diasSem > 0 || justif) {
-      newJusts.push({ data: dataStr, mes, equipe, motivo: justif ? categorizarMotivo(justif) : 'Outros', descricao: justif });
+      newJusts.push({ data: dataStr, mes, ano, equipe, motivo: justif ? categorizarMotivo(justif) : 'Outros', descricao: justif });
     }
   });
 
@@ -3649,22 +3659,29 @@ function injetarBotoesCaptura() {
   });
 }
 
-// Popula todos os <select> de filtro de mês com base nos meses presentes nos dados
+// Popula todos os <select> de filtro de mês com base nos meses (e anos) presentes nos dados
 function populateMonthFilters() {
-  const mesesPresentes = [...new Set([
-    ...records.map(r => r.mes),
-    ...cancelados.map(c => c.mes)
-  ].filter(Boolean))].sort((a,b)=>a-b);
+  const chaves = [...new Set([
+    ...records.map(r => (r.ano && r.mes) ? `${r.ano}-${String(r.mes).padStart(2,'0')}` : null),
+    ...cancelados.map(c => (c.ano && c.mes) ? `${c.ano}-${String(c.mes).padStart(2,'0')}` : null)
+  ].filter(Boolean))].sort();
+
+  // Detecta se há mais de um ano nos dados, para decidir se mostra o ano no rótulo
+  const anosPresentes = new Set(chaves.map(c => c.split('-')[0]));
+  const multiAno = anosPresentes.size > 1;
+
   const selectIds = ['filtroMes','filtroMesProd','filtroMesEquipes','filtroMesJust','filtroMesDash','filtroMesCanel'];
   selectIds.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     const current = el.value;
     el.innerHTML = '<option value="todos">Todos os meses</option>';
-    mesesPresentes.forEach(m => {
+    chaves.forEach(chave => {
+      const [ano, mesStr] = chave.split('-');
+      const mesNum = parseInt(mesStr);
       const opt = document.createElement('option');
-      opt.value = m;
-      opt.textContent = MONTHS_FULL[m-1];
+      opt.value = chave;
+      opt.textContent = multiAno ? `${MONTHS_FULL[mesNum-1]} ${ano}` : MONTHS_FULL[mesNum-1];
       el.appendChild(opt);
     });
     // Mantém seleção anterior se ainda válida
@@ -3672,16 +3689,18 @@ function populateMonthFilters() {
   });
 }
 
-// Helper: retorna records filtrados pelo mês do select informado
+// Helper: retorna records filtrados pelo mês (formato "AAAA-MM") do select informado
 function filteredRecords(selectId) {
-  const mes = document.getElementById(selectId)?.value;
-  if (!mes || mes === 'todos') return records;
-  return records.filter(r => String(r.mes) === String(mes));
+  const val = document.getElementById(selectId)?.value;
+  if (!val || val === 'todos') return records;
+  const [ano, mes] = val.split('-');
+  return records.filter(r => String(r.ano) === String(ano) && String(r.mes) === String(parseInt(mes)));
 }
 function filteredJusts(selectId) {
-  const mes = document.getElementById(selectId)?.value;
-  if (!mes || mes === 'todos') return justificativas;
-  return justificativas.filter(r => String(r.mes) === String(mes));
+  const val = document.getElementById(selectId)?.value;
+  if (!val || val === 'todos') return justificativas;
+  const [ano, mes] = val.split('-');
+  return justificativas.filter(j => String(j.ano) === String(ano) && String(j.mes) === String(parseInt(mes)));
 }
 
 function normalizeEquipe(str) {
@@ -3851,12 +3870,12 @@ function loadDemoData() {
         const date = `2025-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
         const base = { 'PM-01': 14000, 'PM-02': 11000, 'PM-03': 9500, 'PM-04': 12500, 'PM-05': 10500 }[t.id];
         const valor = base * (0.6 + Math.random()*0.8) / diasTrab * (1 + d/diasTrab*0.3);
-        records.push({ data: date, mes: mes+1, equipe: t.id, os: `OS-${++osNum}`, valor: Math.round(valor * 100)/100, tipo_servico: tipos[Math.floor(Math.random()*tipos.length)] });
+        records.push({ data: date, mes: mes+1, ano: 2025, equipe: t.id, os: `OS-${++osNum}`, valor: Math.round(valor * 100)/100, tipo_servico: tipos[Math.floor(Math.random()*tipos.length)] });
       }
       for (let d = 0; d < diasPar; d++) {
         const dia = Math.floor(Math.random()*27) + 1;
         const date = `2025-${String(mes+1).padStart(2,'0')}-${String(dia).padStart(2,'0')}`;
-        justificativas.push({ data: date, mes: mes+1, equipe: t.id, motivo: categorizarMotivo(motivos[Math.floor(Math.random()*motivos.length)]), descricao: motivos[Math.floor(Math.random()*motivos.length)] });
+        justificativas.push({ data: date, mes: mes+1, ano: 2025, equipe: t.id, motivo: categorizarMotivo(motivos[Math.floor(Math.random()*motivos.length)]), descricao: motivos[Math.floor(Math.random()*motivos.length)] });
       }
     });
   }
@@ -3906,9 +3925,12 @@ function saveEntry() {
   const valor   = parseFloat(document.getElementById('entryValor').value)||0;
   const tipo    = document.getElementById('entryTipo').value;
   if (!data || !equipe) { alert('Preencha data e equipe'); return; }
-  records.push({ data, equipe, os, valor, tipo_servico: tipo });
+  const mes = parseInt(data.slice(5,7)) || null;
+  const ano = parseInt(data.slice(0,4)) || null;
+  records.push({ data, mes, ano, equipe, os, valor, tipo_servico: tipo });
   closeModal('entryModal');
   setLastUpdate();
+  populateMonthFilters();
   renderDashboard();
   alert('✅ Lançamento salvo!');
 }
@@ -3919,8 +3941,11 @@ function saveJustificativa() {
   const motivo   = document.getElementById('justMotivo').value;
   const descricao = document.getElementById('justDescricao').value;
   if (!data || !equipe) { alert('Preencha data e equipe'); return; }
-  justificativas.push({ data, equipe, motivo, descricao });
+  const mes = parseInt(data.slice(5,7)) || null;
+  const ano = parseInt(data.slice(0,4)) || null;
+  justificativas.push({ data, mes, ano, equipe, motivo, descricao });
   closeModal('justModal');
+  populateMonthFilters();
   renderJustificativas();
   alert('✅ Justificativa salva!');
 }
