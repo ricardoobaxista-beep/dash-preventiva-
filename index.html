@@ -2244,9 +2244,9 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
 
   // Larguras por número de equipes filtradas (levemente maiores para caber o nome completo da equipe no cabeçalho)
   const dataColW  = numTeams === 1 ? '115px' : numTeams === 2 ? '90px'  : numTeams <= 3 ? '95px'  : '105px';
-  const colServW  = numTeams === 1 ? '60px'  : numTeams === 2 ? '68px'  : '62px';
-  const colOsW    = numTeams === 1 ? '80px'  : numTeams === 2 ? '78px'  : '65px';
-  const colValW   = numTeams === 1 ? '108px' : numTeams === 2 ? '98px'  : '88px';
+  const colServW  = numTeams === 1 ? '58px'  : numTeams === 2 ? '64px'  : '56px';
+  const colOsW    = numTeams === 1 ? '72px'  : numTeams === 2 ? '70px'  : '58px';
+  const colValW   = numTeams === 1 ? '116px' : numTeams === 2 ? '104px' : '94px';
 
   // Força table-layout:fixed para respeitar as larguras definidas
   const tabelaEl = document.getElementById('tabelaDiaria');
@@ -2350,7 +2350,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
 
         row += `<td style="${borderLeft};width:${colServW};overflow:hidden">${chipTipo}${pardaIndicator}</td>`;
         row += `<td class="${osClass}" style="font-size:9px;width:${colOsW};max-width:${colOsW};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${osDisplay}</td>`;
-        row += `<td class="${valorClass}" style="font-size:10px;width:${colValW};max-width:${colValW};padding:4px 2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${cel.valor > 0 ? 'R$ ' + fmt(cel.valor) : (cel.valorTexto || '')}">${valorStr}</td>`;
+        row += `<td class="${valorClass}" style="font-size:9px;width:${colValW};max-width:${colValW};padding:4px 2px;white-space:normal;word-break:break-word;overflow-wrap:break-word;overflow:hidden;line-height:1.2" title="${cel.valor > 0 ? 'R$ ' + fmt(cel.valor) : (cel.valorTexto || '')}">${valorStr}</td>`;
 
         totaisEquipe[t.id] += cel.valor;
         totaisOSEquipe[t.id] += osCount;
