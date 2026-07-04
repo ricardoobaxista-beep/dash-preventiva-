@@ -542,6 +542,7 @@
   /* Células de valor */
   .td-valor-ok { color: var(--accent3); font-weight: 700; }
   .td-valor-zero { color: var(--muted); }
+  .td-valor-texto { color: var(--accent4); font-weight: 600; font-style: italic; }
 
   /* Linha de total */
   .tr-total td {
@@ -2190,7 +2191,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
     d.setDate(d.getDate() + i);
     const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
     mapaData[key] = {};
-    teamsFiltered.forEach(t => { mapaData[key][t.id] = { valor: 0, tipos: [], oss: [], parada: false, justif: '', folga: false }; });
+    teamsFiltered.forEach(t => { mapaData[key][t.id] = { valor: 0, valorTexto: '', tipos: [], oss: [], parada: false, justif: '', folga: false }; });
   }
 
   filtered.forEach(r => {
@@ -2203,6 +2204,9 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
       return; // não soma valor nem OS
     }
     mapaData[r.data][r.equipe].valor += r.valor;
+    if (r.valor_txt && !mapaData[r.data][r.equipe].valorTexto) {
+      mapaData[r.data][r.equipe].valorTexto = r.valor_txt;
+    }
     if (r.tipo_servico && !mapaData[r.data][r.equipe].tipos.includes(r.tipo_servico))
       mapaData[r.data][r.equipe].tipos.push(r.tipo_servico);
     if (isOSValida(r.os)) mapaData[r.data][r.equipe].oss.push(r.os);
@@ -2281,7 +2285,7 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
 
     const temDado = teamsFiltered.some(t => {
       const cel = mapaData[dataKey][t.id];
-      return cel && (cel.valor > 0 || cel.parada);
+      return cel && (cel.valor > 0 || cel.parada || cel.valorTexto);
     });
 
     const trClass = '';
@@ -2297,10 +2301,10 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
       if (cel.folga) {
         // Folga individual desta equipe neste dia (veio da planilha com tipo_servico=F)
         row += `<td colspan="${colsPerTeam}" class="td-folga" style="${borderLeft};background:rgba(255,204,0,0.10)">🔆 FOLGA</td>`;
-      } else if (cel.parada && cel.valor === 0) {
+      } else if (cel.parada && cel.valor === 0 && !cel.valorTexto) {
         const justifShort = cel.justif.length > 22 ? cel.justif.slice(0,22)+'…' : cel.justif;
         row += `<td colspan="${colsPerTeam}" class="td-parada" style="${borderLeft}" title="${cel.justif}">⛔ ${justifShort}</td>`;
-      } else if (cel.valor === 0 && !temDado) {
+      } else if (cel.valor === 0 && !cel.valorTexto && !temDado) {
         row += `<td style="${borderLeft}" class="td-valor-zero">—</td><td class="td-valor-zero">—</td><td class="td-valor-zero">—</td>`;
       } else {
         // Chip tipo de serviço
@@ -2324,16 +2328,25 @@ function renderTabelaDiaria(filtered, filtJust, teamsFiltered) {
         }
         const osClass = osCount > 0 ? '' : 'td-valor-zero';
 
-        // Valor
-        const valorClass = cel.valor > 0 ? 'td-valor-ok' : 'td-valor-zero';
-        const valorStr = cel.valor > 0 ? `R$ ${fmt(cel.valor)}` : '—';
+        // Valor — se não houver valor numérico mas a planilha trouxer um texto
+        // (nome parcial, observação, etc.) na célula de valor, mostra esse texto no lugar.
+        const valorClass = cel.valor > 0 ? 'td-valor-ok' : (cel.valorTexto ? 'td-valor-texto' : 'td-valor-zero');
+        let valorStr;
+        if (cel.valor > 0) {
+          valorStr = `R$ ${fmt(cel.valor)}`;
+        } else if (cel.valorTexto) {
+          const textoCurto = cel.valorTexto.length > 16 ? cel.valorTexto.slice(0,16)+'…' : cel.valorTexto;
+          valorStr = `<span title="${cel.valorTexto}">${textoCurto}</span>`;
+        } else {
+          valorStr = '—';
+        }
 
-        const pardaIndicator = (cel.parada && cel.valor > 0)
+        const pardaIndicator = (cel.parada && (cel.valor > 0 || cel.valorTexto))
           ? `<span style="color:var(--accent2);font-size:9px;display:block" title="${cel.justif}">+parada</span>` : '';
 
         row += `<td style="${borderLeft};width:${colServW};overflow:hidden">${chipTipo}${pardaIndicator}</td>`;
         row += `<td class="${osClass}" style="font-size:9px;width:${colOsW};max-width:${colOsW};overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${osDisplay}</td>`;
-        row += `<td class="${valorClass}" style="font-size:10px;width:${colValW};white-space:nowrap">${valorStr}</td>`;
+        row += `<td class="${valorClass}" style="font-size:10px;width:${colValW};white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${valorStr}</td>`;
 
         totaisEquipe[t.id] += cel.valor;
         totaisOSEquipe[t.id] += osCount;
@@ -3311,6 +3324,7 @@ function parseExcelRows(rows) {
     // ---- VALOR ----
     const valorRaw = row.valor !== undefined ? row.valor : (row.value || 0);
     const valor = parseValor(valorRaw);
+    const valorTxt = extrairValorTexto(valorRaw);
 
     // ---- TIPO SERVIÇO ----
     const tipoServico = String(row.tipo_servico || row.tipo || '').trim();
@@ -3323,8 +3337,8 @@ function parseExcelRows(rows) {
 
     const isFolga = tipoServico.trim().toUpperCase() === 'F' || tipoServico.trim().toUpperCase() === 'FOLGA';
 
-    if (isFolga || os || valor > 0) {
-      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, tipo_servico: tipoServico });
+    if (isFolga || os || valor > 0 || valorTxt) {
+      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, valor_txt: valorTxt, tipo_servico: tipoServico });
     }
     if (diasSem > 0 || justif) {
       newJusts.push({
@@ -3389,15 +3403,17 @@ function parseCSV(text) {
 
     const mes          = parseInt(dataStr.split('-')[1]);
     const ano          = parseInt(dataStr.split('-')[0]) || null;
-    const valor        = parseValor(row.valor || row.value || '0');
+    const valorRawCSV  = row.valor !== undefined ? row.valor : (row.value !== undefined ? row.value : '0');
+    const valor        = parseValor(valorRawCSV);
+    const valorTxt     = extrairValorTexto(valorRawCSV);
     const os           = row.os || row.ordem_servico || '';
     const tipoServico  = row.tipo_servico || row.tipo || '';
     const diasSem      = parseInt(row.dias_sem_prod || '0') || 0;
     const justif       = row.justificativa || row.motivo || '';
 
     const isFolga = ['F','FOLGA'].includes(tipoServico.trim().toUpperCase());
-    if (isFolga || os || valor > 0) {
-      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, tipo_servico: tipoServico });
+    if (isFolga || os || valor > 0 || valorTxt) {
+      newRecords.push({ data: dataStr, mes, ano, equipe, os, valor, valor_txt: valorTxt, tipo_servico: tipoServico });
     }
     if (diasSem > 0 || justif) {
       newJusts.push({ data: dataStr, mes, ano, equipe, motivo: justif ? categorizarMotivo(justif) : 'Outros', descricao: justif });
@@ -3821,6 +3837,21 @@ function parseValor(raw) {
   // Remove qualquer caractere não numérico restante (exceto ponto e sinal)
   s = s.replace(/[^\d.-]/g, '');
   return parseFloat(s) || 0;
+}
+
+// Se a célula de "valor" não contém um número (ex: um nome parcial, observação,
+// "aguardando", etc.), retorna esse texto para poder ser exibido no lugar do valor.
+// Retorna '' quando a célula está vazia ou é de fato um número/moeda válido.
+function extrairValorTexto(raw) {
+  if (raw === null || raw === undefined) return '';
+  if (typeof raw === 'number') return '';
+  const s = String(raw).trim();
+  if (!s) return '';
+  // Se, depois de limpar símbolos de moeda/milhar/decimal, sobrar só dígitos/sinal,
+  // então é um número válido — não é texto.
+  const limpo = s.replace(/R\$\s*/gi, '').replace(/[.,]/g, '').replace(/[^\d-]/g, '');
+  const eNumero = limpo !== '' && !isNaN(Number(limpo));
+  return eNumero ? '' : s;
 }
 
 function parseDate(str) {
